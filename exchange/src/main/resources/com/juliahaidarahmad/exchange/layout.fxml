@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Button?>
+
 <GridPane fx:controller="com.juliahaidarahmad.exchange.Controller"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10"
           stylesheets="@layout.css"
@@ -32,13 +33,13 @@
                    GridPane.columnIndex="1" GridPane.rowIndex="5"/>
           <Separator orientation="HORIZONTAL" GridPane.RowIndex="6"
                      GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-          <TextField id= "usdTextField" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-           <TextField id= "lbpTextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-           <Label fx:id="usdTextField" text="Usd Text Field"
-                   styleClass="value"
+          <TextField fx:id="usdTextField" GridPane.columnIndex="0" GridPane.rowIndex="8" />
+           <TextField fx:id="lbpTextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+           <Label text="Enter USD value:"
+                   styleClass="vale"
                    GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-             <Label fx:id="lbpTextField" text="Leb Text Field"
-           styleClass="value"
+             <Label text="Enter LBP value:"
+           styleClass="vale"
            GridPane.columnIndex="1" GridPane.rowIndex="7"/>
             <RadioButton text="Buy USD" GridPane.columnIndex="0" GridPane.rowIndex="9" >
                 <toggleGroup>
@@ -46,7 +47,7 @@
                 </toggleGroup>
             </RadioButton>
             <RadioButton text="Sell USD" toggleGroup="$transactionType"  GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-            <Button text="Add Transaction" GridPane.columnIndex="0" GridPane.rowIndex="10"/>
+            <Button text="Add Transaction" GridPane.columnIndex="0" GridPane.rowIndex="10" onAction="#addTransaction" />
 
 
 </GridPane>
