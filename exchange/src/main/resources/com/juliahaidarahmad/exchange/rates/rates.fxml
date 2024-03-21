@@ -8,9 +8,9 @@
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Button?>
 
-<GridPane fx:controller="com.juliahaidarahmad.exchange.Controller"
+<GridPane fx:controller="com.juliahaidarahmad.exchange.rates.Rates"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10"
-          stylesheets="@layout.css"
+          stylesheets="@rates.css"
           prefHeight="475.0"
           prefWidth="600.0"
           vgap="10">

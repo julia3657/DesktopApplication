@@ -1,4 +1,4 @@
-package com.juliahaidarahmad.exchange;
+package com.juliahaidarahmad.exchange.rates;
 
 import com.juliahaidarahmad.exchange.api.model.ExchangeRates;
 import com.juliahaidarahmad.exchange.api.model.Transaction;
@@ -12,7 +12,7 @@ import retrofit2.Response;
 import javafx.application.Platform;
 
 
-public class Controller {
+public class Rates {
     public Label buyUsdRateLabel;
     public Label sellUsdRateLabel;
     @FXML

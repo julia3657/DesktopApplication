@@ -9,5 +9,7 @@ module com.juliahaidarahmad.exchange {
     opens com.juliahaidarahmad.exchange to javafx.fxml;
     opens com.juliahaidarahmad.exchange.api.model to gson;
     exports com.juliahaidarahmad.exchange;
+    exports com.juliahaidarahmad.exchange.rates;
+    opens com.juliahaidarahmad.exchange.rates to javafx.fxml;
 }
 
