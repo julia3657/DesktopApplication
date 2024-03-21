@@ -67,7 +67,7 @@ public class Rates {
             alert.showAndWait();
             return; // Exit the method early
         }
-        ExchangeService.exchangeApi().addTransaction(transaction).enqueue(new Callback<Object>() {
+        ExchangeService.exchangeApi().addTransaction(transaction,null).enqueue(new Callback<Object>() {
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 fetchRates();
