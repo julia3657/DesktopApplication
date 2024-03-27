@@ -4,6 +4,7 @@ import com.juliahaidarahmad.exchange.Authentication;
 import com.juliahaidarahmad.exchange.api.ExchangeService;
 import com.juliahaidarahmad.exchange.api.model.Transaction;
 import javafx.fxml.Initializable;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -17,6 +18,7 @@ public class Transactions implements Initializable {
     public TableColumn lbpAmount;
     public TableColumn usdAmount;
     public TableColumn transactionDate;
+    public TableColumn usdToLbp;
     public TableView tableView;
     
     @Override
@@ -27,6 +29,26 @@ public class Transactions implements Initializable {
                 PropertyValueFactory<Transaction, Long>("usdAmount"));
         transactionDate.setCellValueFactory(new
                 PropertyValueFactory<Transaction, String>("addedDate"));
+        usdToLbp.setCellValueFactory(new
+                PropertyValueFactory<Transaction,Boolean>("usdToLbp"));
+        usdToLbp.setCellFactory(column -> new TableCell<Transaction, Boolean>() {
+            @Override
+            protected void updateItem(Boolean item, boolean empty) {
+                super.updateItem(item, empty);
+
+                if (empty || item == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    if (item) {
+                        setText("Sell Usd");
+                    } else {
+                        setText("Buy Usd");
+                    }
+                }
+            }
+        });
+
         ExchangeService.exchangeApi().getTransactions("Bearer " +
                         Authentication.getInstance().getToken())
                 .enqueue(new Callback<List<Transaction>>() {

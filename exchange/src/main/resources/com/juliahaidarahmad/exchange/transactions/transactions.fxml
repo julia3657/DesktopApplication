@@ -16,11 +16,13 @@
             AnchorPane.topAnchor="4">
         <columns>
             <TableColumn text="USD Amount" fx:id="usdAmount"
-                         prefWidth="150"/>
+                         prefWidth="110"/>
             <TableColumn text="LBP Amount" fx:id="lbpAmount"
-                         prefWidth="150"/>
+                         prefWidth="110"/>
             <TableColumn text="Transaction Date" fx:id="transactionDate"
-                         prefWidth="150"/>
+                         prefWidth="110"/>
+            <TableColumn text="Exchange Direction" fx:id="usdToLbp"
+                         prefWidth="110"/>
         </columns>
     </TableView>
 </AnchorPane>
