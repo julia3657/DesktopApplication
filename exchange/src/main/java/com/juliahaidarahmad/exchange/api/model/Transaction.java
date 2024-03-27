@@ -5,6 +5,27 @@ public class Transaction {
     Float usdAmount;
     @SerializedName("lbp_amount")
     Float lbpAmount;
+
+    public Float getUsdAmount() {
+        return usdAmount;
+    }
+
+    public Float getLbpAmount() {
+        return lbpAmount;
+    }
+
+    public Boolean getUsdToLbp() {
+        return usdToLbp;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public String getAddedDate() {
+        return addedDate;
+    }
+
     @SerializedName("usd_to_lbp")
     Boolean usdToLbp;
     @SerializedName("id")

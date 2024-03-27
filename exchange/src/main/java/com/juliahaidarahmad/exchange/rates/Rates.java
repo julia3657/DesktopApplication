@@ -1,5 +1,6 @@
 package com.juliahaidarahmad.exchange.rates;
 
+import com.juliahaidarahmad.exchange.Authentication;
 import com.juliahaidarahmad.exchange.api.model.ExchangeRates;
 import com.juliahaidarahmad.exchange.api.model.Transaction;
 import com.juliahaidarahmad.exchange.api.ExchangeService;
@@ -67,7 +68,11 @@ public class Rates {
             alert.showAndWait();
             return; // Exit the method early
         }
-        ExchangeService.exchangeApi().addTransaction(transaction,null).enqueue(new Callback<Object>() {
+        String userToken = Authentication.getInstance().getToken();
+        String authHeader = userToken != null ? "Bearer " + userToken : null;
+
+        ExchangeService.exchangeApi().addTransaction(transaction,authHeader).enqueue(new Callback<Object>() {
+
             @Override
             public void onResponse(Call<Object> call, Response<Object> response) {
                 fetchRates();
