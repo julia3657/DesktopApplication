@@ -49,5 +49,17 @@
             <RadioButton text="Sell USD" toggleGroup="$transactionType"  GridPane.columnIndex="1" GridPane.rowIndex="9"/>
             <Button text="Add Transaction" GridPane.columnIndex="0" GridPane.rowIndex="10" onAction="#addTransaction" />
 
+            <Separator orientation="HORIZONTAL" GridPane.rowIndex="11"
+               GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+            <Label text="Calculator" GridPane.columnIndex="0" GridPane.rowIndex="12"
+           styleClass="value-label"/>
+           <TextField fx:id="calculatorTextField" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
+           <Label text="Result: -" fx:id="resultCalculator" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
+           <RadioButton text="USD to LBP" GridPane.columnIndex="0" GridPane.rowIndex="14">
+           <toggleGroup><ToggleGroup fx:id="calculatorType"/></toggleGroup>
+            </RadioButton>
+            <RadioButton text="LBP to USD" toggleGroup="$calculatorType" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+            <Button text="Calculate" onAction="#calculateResult" GridPane.columnIndex="0" GridPane.rowIndex="15" GridPane.columnSpan="2"/>
+
 
 </GridPane>

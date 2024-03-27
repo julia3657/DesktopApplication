@@ -21,6 +21,9 @@ public class Rates {
     @FXML
     public TextField usdTextField;
     public ToggleGroup transactionType;
+    public Label resultCalculator;
+    public TextField calculatorTextField;
+    public ToggleGroup calculatorType;
     public void initialize() {
         fetchRates();
     }
@@ -107,4 +110,46 @@ public class Rates {
 
     }
 
-}
+    public void calculateResult(ActionEvent actionEvent) {
+
+            float usdValue = Float.parseFloat(buyUsdRateLabel.getText());
+            float lbpValue = Float.parseFloat(sellUsdRateLabel.getText());
+            if (usdValue <= 0 || lbpValue <= 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Warning");
+                alert.setHeaderText("Invalid Input Detected");
+                alert.setContentText("Negative values are not allowed. Please enter a positive number.");
+                alert.showAndWait();
+                return;
+            }
+            RadioButton selectedRadioButton = (RadioButton) calculatorType.getSelectedToggle();
+            if (selectedRadioButton == null) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText("Please select an exchange type.");
+                return;
+            }
+            boolean isUsdToLbp = selectedRadioButton.getText().equals("USD to LBP");
+            float amount = Float.parseFloat(calculatorTextField.getText());
+            if (amount <= 0) {
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Error");
+                alert.setHeaderText("Invalid Input Detected");
+                alert.setContentText("Amount must be greater than zero.");
+                alert.showAndWait();
+                return;
+            }
+            float result;
+            if (isUsdToLbp) {
+                result = amount * usdValue;
+            } else {
+                result = amount / lbpValue;
+            }
+
+            String output = "Result: " + (isUsdToLbp ? "LBP " : "USD ") + result;
+            Platform.runLater(() -> {
+                calculatorTextField.setText("");
+                resultCalculator.setText(output);
+            });
+
+    }}
