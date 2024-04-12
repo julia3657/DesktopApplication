@@ -11,6 +11,8 @@ module com.juliahaidarahmad.exchange {
     opens com.juliahaidarahmad.exchange.api.model to gson,javafx.base;
     exports com.juliahaidarahmad.exchange;
     exports com.juliahaidarahmad.exchange.rates;
+    exports com.juliahaidarahmad.exchange.Statistics to javafx.fxml;
+    opens com.juliahaidarahmad.exchange.Statistics to javafx.fxml;
     opens com.juliahaidarahmad.exchange.rates to javafx.fxml;
     opens com.juliahaidarahmad.exchange.login to javafx.fxml;
     opens com.juliahaidarahmad.exchange.register to javafx.fxml;

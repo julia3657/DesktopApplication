@@ -1,8 +1,11 @@
 package com.juliahaidarahmad.exchange;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
 import java.io.IOException;
 import java.net.URL;
@@ -13,6 +16,8 @@ public class Parent implements OnPageCompleteListener,Initializable{
     public Button loginButton;
     public Button registerButton;
     public Button logoutButton;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateNavigation();
@@ -65,11 +70,15 @@ public class Parent implements OnPageCompleteListener,Initializable{
         updateNavigation();
     }
 
+    public void statsSelected(ActionEvent actionEvent) {swapContent(Section.STATISTICS);}
+
     private enum Section {
         RATES,
         TRANSACTIONS,
         LOGIN,
-        REGISTER;
+        REGISTER,
+        STATISTICS;
+
         public String getResource() {
             return switch (this) {
                 case RATES ->
@@ -80,6 +89,8 @@ public class Parent implements OnPageCompleteListener,Initializable{
                         "/com/juliahaidarahmad/exchange/login/login.fxml";
                 case REGISTER ->
                         "/com/juliahaidarahmad/exchange/register/register.fxml";
+                case STATISTICS ->
+                        "/com/juliahaidarahmad/exchange/Statistics/Statistics.fxml";
                 default -> null;
             };
         }

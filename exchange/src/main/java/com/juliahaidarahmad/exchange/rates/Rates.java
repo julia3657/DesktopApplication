@@ -33,18 +33,30 @@ public class Rates {
             public void onResponse(Call<ExchangeRates> call, Response<ExchangeRates> response) {
                 ExchangeRates exchangeRates = response.body();
                 Platform.runLater(() -> {
-
-                    buyUsdRateLabel.setText(exchangeRates.lbpToUsd.toString());
-
-                    sellUsdRateLabel.setText(exchangeRates.usdToLbp.toString());
+                    if (exchangeRates.lbpToUsd == null) {
+                        sellUsdRateLabel.setText("null");
+                    }
+                    else if(exchangeRates.usdToLbp == null) {
+                        buyUsdRateLabel.setText("null");
+                    }
+                    else {
+                        buyUsdRateLabel.setText(exchangeRates.lbpToUsd.toString());
+                        sellUsdRateLabel.setText(exchangeRates.usdToLbp.toString());
+                    }
                 });
             }
+
             @Override
             public void onFailure(Call<ExchangeRates> call, Throwable throwable) {
-                                                                             }
+                Platform.runLater(() -> {
+                    // Handle the error scenario, you can also set the labels to "null" or any error message
+                    buyUsdRateLabel.setText("Error fetching data");
+                    sellUsdRateLabel.setText("Error fetching data");
+                });
+            }
         });
-
     }
+
     public void addTransaction(ActionEvent actionEvent) {
     try{
         if (transactionType.getSelectedToggle() == null) {

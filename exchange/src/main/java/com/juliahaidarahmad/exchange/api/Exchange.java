@@ -1,13 +1,7 @@
 package com.juliahaidarahmad.exchange.api;
-import com.juliahaidarahmad.exchange.api.model.ExchangeRates;
-import com.juliahaidarahmad.exchange.api.model.Token;
-import com.juliahaidarahmad.exchange.api.model.Transaction;
-import com.juliahaidarahmad.exchange.api.model.User;
+import com.juliahaidarahmad.exchange.api.model.*;
 import retrofit2.Call;
-import retrofit2.http.Body;
-import retrofit2.http.GET;
-import retrofit2.http.Header;
-import retrofit2.http.POST;
+import retrofit2.http.*;
 
 import java.util.List;
 
@@ -24,4 +18,9 @@ public interface Exchange {
     @GET("/transaction")
     Call<List<Transaction>> getTransactions(@Header("Authorization")
                                             String authorization);
+    @GET("/statistics")
+    Call<Statistics> getStats(@Query("days") Integer numberOfDays);
+
+    @GET("/graph")
+    Call<GraphsResponse> getGraph(@Query("from") String date1, @Query("to") String date2);
 }

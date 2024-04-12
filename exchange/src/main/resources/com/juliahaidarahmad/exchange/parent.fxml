@@ -22,6 +22,7 @@
                     text="Register" onAction="#registerSelected"/>
             <Button fx:id="logoutButton" styleClass="nav-button" text="Log
 out" onAction="#logoutSelected"/>
+            <Button fx:id="statsButton" styleClass="nav-button" text="Statistics" onAction="#statsSelected"/>
         </VBox>
     </left>
     <center>
