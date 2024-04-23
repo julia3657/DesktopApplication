@@ -6,6 +6,9 @@ public class Transaction {
     @SerializedName("lbp_amount")
     Float lbpAmount;
 
+    public Transaction(String usdAmount, String lbpAmount, String date, String direction) {
+    }
+
     public Float getUsdAmount() {
         return usdAmount;
     }

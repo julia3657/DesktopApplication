@@ -3,6 +3,7 @@ package com.juliahaidarahmad.exchange.transactions;
 import com.juliahaidarahmad.exchange.Authentication;
 import com.juliahaidarahmad.exchange.api.ExchangeService;
 import com.juliahaidarahmad.exchange.api.model.Transaction;
+import com.juliahaidarahmad.exchange.api.model.User;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -20,7 +21,7 @@ public class Transactions implements Initializable {
     public TableColumn transactionDate;
     public TableColumn usdToLbp;
     public TableView tableView;
-    
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         lbpAmount.setCellValueFactory(new

@@ -23,6 +23,7 @@
             <Button fx:id="logoutButton" styleClass="nav-button" text="Log
 out" onAction="#logoutSelected"/>
             <Button fx:id="statsButton" styleClass="nav-button" text="Statistics" onAction="#statsSelected"/>
+            <Button fx:id="marketButton" styleClass="nav-button" text="Market Place" onAction="#marketplaceSelected"/>
         </VBox>
     </left>
     <center>

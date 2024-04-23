@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import java.lang.Integer?>
+<?import java.lang.String?>
+<?import com.sun.javafx.charts.Legend?>
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="com.juliahaidarahmad.exchange.Statistics.Statistics"
+            stylesheets="@Statistics.css"
+            prefHeight="500.0" prefWidth="600.0">
+
+    <BorderPane prefHeight="300.0" prefWidth="355.0"
+                AnchorPane.topAnchor="5">
+        <center>
+            <LineChart fx:id="graph" title="Rates Over Time"  BorderPane.alignment="CENTER">
+                <xAxis>
+                    <NumberAxis fx:id="xAxis" side="BOTTOM"
+                                    animated="false"/>
+                </xAxis>
+                <yAxis>
+                    <NumberAxis fx:id="yAxis" side="LEFT"
+                                animated="false" />
+                </yAxis>
+            </LineChart>
+        </center>
+    </BorderPane>
+
+
+
+
+
+    <TableView
+            fx:id="tableView"
+            AnchorPane.bottomAnchor="4"
+            AnchorPane.leftAnchor="4"
+            AnchorPane.rightAnchor="4"
+            AnchorPane.topAnchor="320">
+        <columns>
+            <TableColumn text="Statistic" fx:id="stats"
+                         prefWidth="170"/>
+
+            <TableColumn text="LBP to USD" fx:id="lbpToUsd"
+                         prefWidth="135"/>
+
+            <TableColumn text="USD to LBP" fx:id="usdToLbp"
+                         prefWidth="135"/>
+        </columns>
+    </TableView>
+
+    <GridPane hgap="10" vgap="10">
+        <ChoiceBox fx:id="choiceBoxCurrency" GridPane.rowIndex="4" GridPane.columnIndex="33" value="LBP to USD" onAction="#fetchGraphs">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="LBP to USD" />
+                    <String fx:value="USD to LBP" />
+                    <String fx:value="Both" />
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+        <ChoiceBox fx:id="numberOfDaysGraph"
+                   GridPane.rowIndex="5"
+                   GridPane.columnIndex="33"
+                   onAction="#fetchGraphs"
+                   value="Last 30 Days">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Last 10 Days"/>
+                    <String fx:value="Last 15 Days"/>
+                    <String fx:value="Last 30 Days"/>
+                    <String fx:value="Last 60 Days"/>
+                    <String fx:value="Last 90 Days"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+        <ChoiceBox fx:id="numberOfDaysStats"
+                   GridPane.rowIndex="23"
+                   GridPane.columnIndex="33"
+                   onAction="#fetchStats"
+                   value="Last 30 Days">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Last 5 Days"/>
+                    <String fx:value="Last 15 Days"/>
+                    <String fx:value="Last 30 Days"/>
+                    <String fx:value="Last 60 Days"/>
+                    <String fx:value="Last 90 Days"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+    </GridPane>
+
+
+
+</AnchorPane>

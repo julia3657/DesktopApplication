@@ -39,6 +39,7 @@ public class Parent implements OnPageCompleteListener,Initializable{
     public void registerSelected() {
         swapContent(Section.REGISTER);
     }
+    public void marketplaceSelected(){swapContent(Section.MARKETPLACE);}
     public void logoutSelected() {
         Authentication.getInstance().deleteToken();
         swapContent(Section.RATES);
@@ -77,8 +78,8 @@ public class Parent implements OnPageCompleteListener,Initializable{
         TRANSACTIONS,
         LOGIN,
         REGISTER,
-        STATISTICS;
-
+        STATISTICS,
+        MARKETPLACE;
         public String getResource() {
             return switch (this) {
                 case RATES ->
@@ -91,6 +92,8 @@ public class Parent implements OnPageCompleteListener,Initializable{
                         "/com/juliahaidarahmad/exchange/register/register.fxml";
                 case STATISTICS ->
                         "/com/juliahaidarahmad/exchange/Statistics/Statistics.fxml";
+                case MARKETPLACE ->
+                        "/com/juliahaidarahmad/exchange/MarketPlace/MarketPlace.fxml";
                 default -> null;
             };
         }

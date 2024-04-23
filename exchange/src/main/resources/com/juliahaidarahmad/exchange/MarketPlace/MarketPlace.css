@@ -1,0 +1,54 @@
+.root {
+    -fx-background-color: whitesmoke;
+}
+.header {
+    -fx-font-size: 24;
+}
+.value-label {
+    -fx-font-size: 20;
+}
+.value {
+    -fx-font-size: 18;
+}
+.vale {
+    -fx-font-size: 12;
+}
+.sub {
+    -fx-font-size: 14;
+}
+.root {
+    -fx-font-family: 'Arial';
+    -fx-base: #FFFFFF;
+}
+.table-title {
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2a2a2a;
+    -fx-padding: 10px;
+    -fx-alignment: center;
+}
+
+.header {
+    -fx-font-size: 30px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2A2A2A;
+    -fx-padding: 20;
+}
+
+.value-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #333333;
+    -fx-padding: 10;
+
+}
+
+
+.grid {
+    -fx-padding: 0;
+    -fx-margin: 0;
+}
+
+.label, .text-field, .radio-button, .button {
+    -fx-padding: 2;
+    -fx-margin: 2;
+}

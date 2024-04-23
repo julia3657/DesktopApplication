@@ -9,8 +9,20 @@ public class User {
     String username;
     @SerializedName("password")
     String password;
+
+    @SerializedName("balance_usd")
+    Float balanceUsd;
+    @SerializedName("balance_lbp")
+    Float balanceLbp;
     public User(String username, String password) {
         this.username = username;
         this.password = password;
+    }
+
+    public Float getUsdBalance() {
+        return balanceUsd;
+    }
+    public Float getLbpBalance() {
+        return balanceLbp;
     }
 }

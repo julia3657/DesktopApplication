@@ -23,4 +23,15 @@ public interface Exchange {
 
     @GET("/graph")
     Call<GraphsResponse> getGraph(@Query("from") String date1, @Query("to") String date2);
+
+    @POST("/market")
+    Call<Object> addMarketPlace(@Body MarketPlace marketplace,
+                                @Header("Authorization") String authorization);
+    @GET("/market")
+    Call<List<MarketPlace>> getMarketPlace();
+    @POST("/market/buy")
+    Call<Void> buyMarketPlace(@Body MarketPlace marketPlace,
+                              @Header("Authorization") String authorization);
+    @GET("/user")
+    Call<User> getUser(@Header("Authorization") String authorization);
 }
