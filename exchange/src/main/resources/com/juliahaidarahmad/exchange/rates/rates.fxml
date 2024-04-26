@@ -7,6 +7,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 
 <GridPane fx:controller="com.juliahaidarahmad.exchange.rates.Rates"
           xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10"
@@ -14,52 +15,49 @@
           prefHeight="475.0"
           prefWidth="600.0"
           vgap="10">
-          <Label text="LBP Exchange Rate"
-                 styleClass="header"
-                 textAlignment="CENTER" GridPane.columnSpan="2"
-                   GridPane.halignment="CENTER"
-            />
-          <Label text="Buy USD Rate" GridPane.columnIndex="0"
-                 styleClass="value-label"
-                 GridPane.rowIndex="4"/>
-          <Label fx:id="buyUsdRateLabel" text="Buy Rate"
-                 styleClass="value"
-                 GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-          <Label text="Sell USD Rate" GridPane.columnIndex="1"
-                 styleClass="value-label"
-                 GridPane.rowIndex="4"/>
-          <Label fx:id="sellUsdRateLabel" text="Sell Rate"
-                 styleClass="value"
-                   GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-          <Separator orientation="HORIZONTAL" GridPane.RowIndex="6"
-                     GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-          <TextField fx:id="usdTextField" GridPane.columnIndex="0" GridPane.rowIndex="8" />
-           <TextField fx:id="lbpTextField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-           <Label text="Enter USD value:"
-                   styleClass="vale"
-                   GridPane.columnIndex="0" GridPane.rowIndex="7"/>
-             <Label text="Enter LBP value:"
-           styleClass="vale"
-           GridPane.columnIndex="1" GridPane.rowIndex="7"/>
-            <RadioButton text="Buy USD" GridPane.columnIndex="0" GridPane.rowIndex="9" >
-                <toggleGroup>
-                    <ToggleGroup fx:id="transactionType" />
-                </toggleGroup>
-            </RadioButton>
-            <RadioButton text="Sell USD" toggleGroup="$transactionType"  GridPane.columnIndex="1" GridPane.rowIndex="9"/>
-            <Button text="Add Transaction" GridPane.columnIndex="0" GridPane.rowIndex="10" onAction="#addTransaction" />
-
-            <Separator orientation="HORIZONTAL" GridPane.rowIndex="11"
+    <Label text="LBP Exchange Rate"
+           styleClass="header"
+           textAlignment="CENTER" GridPane.columnSpan="2"
+           GridPane.halignment="CENTER"
+    />
+    <Label text="Buy USD Rate" GridPane.columnIndex="0"
+           styleClass="value-label"
+           GridPane.rowIndex="4"/>
+    <Label fx:id="buyUsdRateLabel" text="Buy Rate"
+           styleClass="value"
+           GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <Label text="Sell USD Rate" GridPane.columnIndex="1"
+           styleClass="value-label"
+           GridPane.rowIndex="4"/>
+    <Label fx:id="sellUsdRateLabel" text="Sell Rate"
+           styleClass="value"
+           GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <Separator orientation="HORIZONTAL" GridPane.RowIndex="6"
                GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-            <Label text="Calculator" GridPane.columnIndex="0" GridPane.rowIndex="12"
-           styleClass="value-label"/>
-           <TextField fx:id="calculatorTextField" GridPane.columnIndex="0" GridPane.rowIndex="13"/>
-           <Label text="Result: -" fx:id="resultCalculator" GridPane.columnIndex="1" GridPane.rowIndex="13"/>
-           <RadioButton text="USD to LBP" GridPane.columnIndex="0" GridPane.rowIndex="14">
-           <toggleGroup><ToggleGroup fx:id="calculatorType"/></toggleGroup>
-            </RadioButton>
-            <RadioButton text="LBP to USD" toggleGroup="$calculatorType" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
-            <Button text="Calculate" onAction="#calculateResult" GridPane.columnIndex="0" GridPane.rowIndex="15" GridPane.columnSpan="2"/>
+    <TextField fx:id="usdTextField" GridPane.columnIndex="0" GridPane.rowIndex="7"  promptText="Enter USD Amount" />
+    <TextField fx:id="lbpTextField" GridPane.columnIndex="1" GridPane.rowIndex="7" promptText="Enter LBP Amount" />
+    <RadioButton text="Buy USD" GridPane.columnIndex="0" GridPane.rowIndex="10" >
+        <toggleGroup>
+            <ToggleGroup fx:id="transactionType" />
+        </toggleGroup>
+    </RadioButton>
+    <RadioButton text="Sell USD" toggleGroup="$transactionType"  GridPane.columnIndex="1" GridPane.rowIndex="10"/>
+    <Button text="Add Transaction" GridPane.columnIndex="0" GridPane.rowIndex="11" onAction="#addTransaction" />
 
+
+    <Separator orientation="HORIZONTAL" GridPane.rowIndex="12"
+               GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <Label text="Calculator" GridPane.columnIndex="0" GridPane.rowIndex="13"
+           styleClass="value-label"/>
+    <TextField fx:id="calculatorTextField" GridPane.columnIndex="0" GridPane.rowIndex="14"/>
+    <Label text="Result: -" fx:id="resultCalculator" GridPane.columnIndex="1" GridPane.rowIndex="14"/>
+    <RadioButton text="USD to LBP" GridPane.columnIndex="0" GridPane.rowIndex="15">
+        <toggleGroup><ToggleGroup fx:id="calculatorType"/></toggleGroup>
+    </RadioButton>
+    <RadioButton text="LBP to USD" toggleGroup="$calculatorType" GridPane.rowIndex="15" GridPane.columnIndex="1"/>
+    <Button text="Calculate" onAction="#calculateResult" GridPane.columnIndex="0" GridPane.rowIndex="16" GridPane.columnSpan="2"/>
+    <DatePicker fx:id="transactionDatePicker" GridPane.columnIndex="1" GridPane.rowIndex="9"/>
+    <TextField fx:id="exchangeRateTextField" GridPane.columnIndex="0" GridPane.rowIndex="9"
+               promptText="Enter Exchange Rate" />
 
 </GridPane>

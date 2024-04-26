@@ -4,6 +4,7 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import java.net.URL?>
 <FlowPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.juliahaidarahmad.exchange.login.Login"
@@ -19,4 +20,6 @@
     <Label text="Password"/>
     <TextField fx:id="passwordTextField"/>
     <Button text="Login" onAction="#login"/>
+    <Hyperlink text="Login with Google" onAction="#openGoogleLogin"> </Hyperlink>
+    <Hyperlink text="Forget Password?" onAction="#openGoogleLogin"> </Hyperlink>
 </FlowPane>

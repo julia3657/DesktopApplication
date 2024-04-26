@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class User {
     @SerializedName("id")
-    Integer id;
+    public Integer id;
     @SerializedName("user_name")
     String username;
     @SerializedName("password")
@@ -24,5 +24,9 @@ public class User {
     }
     public Float getLbpBalance() {
         return balanceLbp;
+    }
+
+    public Integer getId() {
+        return id;
     }
 }

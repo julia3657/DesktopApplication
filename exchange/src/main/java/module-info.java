@@ -20,5 +20,6 @@ module com.juliahaidarahmad.exchange {
     opens com.juliahaidarahmad.exchange.register to javafx.fxml;
     opens com.juliahaidarahmad.exchange.transactions to javafx.fxml;
     opens com.juliahaidarahmad.exchange.MarketPlace to javafx.fxml;
+
 }
 

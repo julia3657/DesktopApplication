@@ -13,10 +13,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
+
 import java.util.ArrayList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import retrofit2.Call;
@@ -45,27 +43,34 @@ public class Statistics implements Initializable {
     public TableColumn<Table, Float> lbpToUsd;
     public TableColumn<Table, Float> usdToLbp;
     public TableView tableView;
-    public void fetchGraphs(ActionEvent actionEvent) {
-        LocalDate toDate = LocalDate.now();
-        String numDaysStr = (String) numberOfDaysGraph.getValue();
-        String selected = (String) choiceBoxCurrency.getValue();
-        Integer numDays;
+    @FXML
+    private DatePicker fromDate;
+    @FXML
+    private DatePicker toDate;
+    @FXML
+    private DatePicker fromStatsDate;
+    @FXML
+    private DatePicker toStatsDate;
 
-        try {
-            numDays = Integer.parseInt(numDaysStr.substring(5, 7).trim());
-        } catch (NumberFormatException e) {
-            System.out.println("Failed to parse the number of days from: " + numDaysStr);
+
+    public void fetchGraphs(ActionEvent actionEvent) {
+        LocalDate fromDateValue = fromDate.getValue();
+        LocalDate toDateValue = toDate.getValue();
+
+        if (fromDateValue == null || toDateValue == null || fromDateValue.isAfter(toDateValue)) {
+            System.out.println("Please select valid dates.");
             return;
         }
-        LocalDate fromDate = toDate.minusDays(numDays);
 
-        ExchangeService.exchangeApi().getGraph(fromDate.toString(), toDate.toString()).enqueue(new Callback<GraphsResponse>() {
+        String selected = (String) choiceBoxCurrency.getValue();
+
+        ExchangeService.exchangeApi().getGraph(fromDateValue.toString(), toDateValue.toString()).enqueue(new Callback<GraphsResponse>() {
             @Override
             public void onResponse(Call<GraphsResponse> call, Response<GraphsResponse> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     GraphsResponse graphsResponse = response.body();
                     Platform.runLater(() -> {
-                        graph.getData().clear();  // Clear the graph once before adding new data
+                        graph.getData().clear();
 
                         if (selected.equals("LBP to USD") || selected.equals("Both")) {
                             addDataSeries(graphsResponse.getLbpToUsd(), "LBP to USD");
@@ -78,6 +83,7 @@ public class Statistics implements Initializable {
                     System.out.println("No data available or an error occurred.");
                 }
             }
+
             @Override
             public void onFailure(Call<GraphsResponse> call, Throwable throwable) {
                 System.out.println("Failed to fetch graph data: " + throwable.getMessage());
@@ -134,7 +140,6 @@ public class Statistics implements Initializable {
     }
 
 
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         stats.setCellValueFactory(new PropertyValueFactory<Table, String>("statName"));
@@ -147,5 +152,4 @@ public class Statistics implements Initializable {
         fetchStats(null);
         fetchGraphs(null);
     }
-
 }

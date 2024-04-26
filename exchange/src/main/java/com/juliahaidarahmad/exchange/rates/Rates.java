@@ -1,16 +1,21 @@
 package com.juliahaidarahmad.exchange.rates;
 
 import com.juliahaidarahmad.exchange.Authentication;
+import com.juliahaidarahmad.exchange.Parent;
 import com.juliahaidarahmad.exchange.api.model.ExchangeRates;
 import com.juliahaidarahmad.exchange.api.model.Transaction;
 import com.juliahaidarahmad.exchange.api.ExchangeService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.layout.GridPane;
 import retrofit2.Callback;
 import retrofit2.Call;
 import retrofit2.Response;
 import javafx.application.Platform;
+import javafx.scene.control.PopupControl;
+import java.io.IOException;
 
 
 public class Rates {
@@ -24,9 +29,17 @@ public class Rates {
     public Label resultCalculator;
     public TextField calculatorTextField;
     public ToggleGroup calculatorType;
-    public void initialize() {
+    public PopupControl advancedFeaturesPopup;
+    public DatePicker scheduledDatePicker;
+    public TextField scheduledRateTextField;
+    @FXML
+    private GridPane advancedFeaturesGrid;
+
+
+    public void initialize() throws IOException {
         fetchRates();
     }
+
     private void fetchRates() {
         ExchangeService.exchangeApi().getExchangeRates().enqueue(new Callback<ExchangeRates>() {
             @Override
@@ -120,6 +133,7 @@ public class Rates {
             return;
         }
 
+
     }
 
     public void calculateResult(ActionEvent actionEvent) {
@@ -164,4 +178,6 @@ public class Rates {
                 resultCalculator.setText(output);
             });
 
-    }}
+    }
+
+}

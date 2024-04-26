@@ -36,11 +36,12 @@
     <AnchorPane prefHeight="300.0" prefWidth="300.0">
         <TableView fx:id="tableView" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <columns>
-                <TableColumn text="ID" fx:id="idColumn" prefWidth="30"/>
+                <TableColumn  fx:id="idColumn" prefWidth="0" visible="false"/>
                 <TableColumn text="USD Amount" fx:id="usdAmountColumn" prefWidth="90"/>
                 <TableColumn text="LBP Amount" fx:id="lbpAmountColumn" prefWidth="90"/>
-                <TableColumn text="Date" fx:id="dateColumn" prefWidth="78"/>
-                <TableColumn text="Direction" fx:id="directionColumn" prefWidth="78"/>
+                <TableColumn text="Date" fx:id="dateColumn" prefWidth="90"/>
+                <TableColumn text="Direction" fx:id="directionColumn" prefWidth="95"/>
+
             </columns>
         </TableView>
     </AnchorPane>

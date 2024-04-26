@@ -26,3 +26,11 @@
 
 .default-color0.chart-series-line { -fx-stroke: blue; }
 .default-color1.chart-series-line { -fx-stroke: green; }
+
+.datepicker {
+    -fx-pref-width: 120px;  }
+
+.large-choicebox {
+    -fx-pref-width: 500px;
+    -fx-pref-height: 20px;
+}

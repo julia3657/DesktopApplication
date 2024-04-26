@@ -20,7 +20,6 @@ public interface Exchange {
                                             String authorization);
     @GET("/statistics")
     Call<Statistics> getStats(@Query("days") Integer numberOfDays);
-
     @GET("/graph")
     Call<GraphsResponse> getGraph(@Query("from") String date1, @Query("to") String date2);
 
@@ -34,4 +33,9 @@ public interface Exchange {
                               @Header("Authorization") String authorization);
     @GET("/user")
     Call<User> getUser(@Header("Authorization") String authorization);
+
+    @DELETE("/market/{market_id}")
+    Call<Void> deleteMarketPlace(@Header("Authorization") String authorization, @Path("market_id") String marketId);
+
+
 }

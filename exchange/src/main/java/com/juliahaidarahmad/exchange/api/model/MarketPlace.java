@@ -16,14 +16,17 @@ public class MarketPlace {
     private Boolean usdToLbp;
 
 
+    @SerializedName("user_id")
+    private String creatorId;
+
     @SerializedName("added_date")
     private String addedDate;
-
     public MarketPlace(Integer id, Float usdAmount, Float lbpAmount, Boolean usdToLbp) {
         this.id = id;
         this.usdAmount = usdAmount;
         this.lbpAmount = lbpAmount;
         this.usdToLbp = usdToLbp;
+     //   this.creatorId= String.valueOf(creatorId);
     }
 
 
@@ -67,4 +70,6 @@ public class MarketPlace {
     public void setAddedDate(String addedDate) {
         this.addedDate = addedDate;
     }
+
+    public String getCreatorId() { return creatorId;}
 }

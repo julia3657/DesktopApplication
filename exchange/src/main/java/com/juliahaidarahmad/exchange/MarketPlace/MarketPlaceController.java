@@ -15,13 +15,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
-
-
+import javafx.scene.layout.HBox;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
+import com.juliahaidarahmad.exchange.login.Login;
 public class MarketPlaceController implements Initializable {
 
     @FXML
@@ -73,30 +72,84 @@ public class MarketPlaceController implements Initializable {
         TableColumn<MarketPlace, Void> actionColumn = new TableColumn<>("Action");
 
         actionColumn.setCellFactory(col -> new TableCell<MarketPlace, Void>() {
-            private final Button buyButton = new Button("Buy");
+            Button buyButton = new Button("\u2713"); // Unicode for check mark
+            Button deleteButton = new Button("\u2716");
 
             {
                 buyButton.setOnAction(event -> {
                     MarketPlace data = getTableView().getItems().get(getIndex());
                     handleBuy(data); // Method to handle the buying process
                 });
+                deleteButton.setOnAction(event -> {
+                    MarketPlace dataToDelete = getTableView().getItems().get(getIndex());
+                    handleDelete(dataToDelete,Login.authenticatedUser);
+                });
             }
-
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
                 if (empty) {
                     setGraphic(null);
                 } else {
-                    setGraphic(buyButton);
+                    HBox hBox = new HBox(5);  // Use HBox to hold both buttons
+                    hBox.getChildren().addAll(buyButton, deleteButton);
+                    setGraphic(hBox);
                 }
             }
+
         });
+
 
         tableView.getColumns().add(actionColumn);
         loadMarketData();
         getUser();
     }
+    private void handleDelete(MarketPlace marketPlaceToDelete, User authenticatedUser) {
+        String userToken = Authentication.getInstance().getToken();
+        String authHeader = userToken != null ? "Bearer " + userToken : null;
+
+
+        if (authHeader != null ) {
+            String marketId = String.valueOf(marketPlaceToDelete.getId());
+            ExchangeService.exchangeApi().deleteMarketPlace(authHeader, marketId).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    Platform.runLater(() -> {
+                        if (response.isSuccessful()) {
+                            showAlert(Alert.AlertType.INFORMATION, "Success", "Market transaction deleted successfully!");
+                            // Refresh the table view to reflect the deletion
+                            loadMarketData();
+                        } else {
+                            String errorMessage = "Failed to delete transaction.";
+                            if (response.errorBody() != null) {
+                                try {
+                                    // Extract error message from error body
+                                    errorMessage = response.errorBody().string();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+                            showAlert(Alert.AlertType.ERROR, "Error", errorMessage);
+                        }
+                    });
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable throwable) {
+                    Platform.runLater(() -> {
+                        showAlert(Alert.AlertType.ERROR, "Error", "Network error or server is down. Please try again later.");
+                        throwable.printStackTrace();
+                    });
+                }
+            });
+        } else {
+            // User is not authorized to delete the marketplace entry
+            showAlert(Alert.AlertType.ERROR, "Unauthorized", "You are not authorized to delete this transaction.");
+        }
+    }
+
+
+
     private void handleBuy(MarketPlace marketPlace) {
         String userToken = Authentication.getInstance().getToken();
         String authHeader = userToken != null ? "Bearer " + userToken : null;
@@ -108,7 +161,7 @@ public class MarketPlaceController implements Initializable {
                     if (response.isSuccessful()) {
                         showAlert(Alert.AlertType.INFORMATION, "Success", "Transaction successfully processed for " + marketPlace.getUsdAmount() + " USD");
                     } else {
-                        showAlert(Alert.AlertType.ERROR, "Failed", "Transaction failed to process for " + marketPlace.getUsdAmount() + " USD");
+                        showAlert(Alert.AlertType.ERROR, "Failed", "You cannot buy from yourself " + marketPlace.getUsdAmount() + " USD");
                         String errorMessage = null;
                         try {
                             errorMessage = " Error: " + response.errorBody().string();
@@ -210,7 +263,7 @@ public class MarketPlaceController implements Initializable {
                             lbpTextField.clear();
                             showAlert(Alert.AlertType.INFORMATION, "Success", "Transaction added successfully!");
                         } else {
-                            showAlert(Alert.AlertType.ERROR, "Error", "Failed to complete transaction, make sure you are logged in.");
+                            showAlert(Alert.AlertType.ERROR, "Error", "You are not logged in or don't have enough credit");
                         }
                     });
                 }

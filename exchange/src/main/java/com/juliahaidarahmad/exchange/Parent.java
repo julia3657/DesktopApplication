@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.BorderPane;
@@ -16,6 +17,7 @@ public class Parent implements OnPageCompleteListener,Initializable{
     public Button loginButton;
     public Button registerButton;
     public Button logoutButton;
+    private Scene scene;
 
 
     @Override
@@ -40,6 +42,7 @@ public class Parent implements OnPageCompleteListener,Initializable{
         swapContent(Section.REGISTER);
     }
     public void marketplaceSelected(){swapContent(Section.MARKETPLACE);}
+
     public void logoutSelected() {
         Authentication.getInstance().deleteToken();
         swapContent(Section.RATES);
@@ -73,12 +76,18 @@ public class Parent implements OnPageCompleteListener,Initializable{
 
     public void statsSelected(ActionEvent actionEvent) {swapContent(Section.STATISTICS);}
 
+
+    public void setScene(Scene scene) {
+        this.scene = scene;
+    }
+
     private enum Section {
         RATES,
         TRANSACTIONS,
         LOGIN,
         REGISTER,
         STATISTICS,
+
         MARKETPLACE;
         public String getResource() {
             return switch (this) {

@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.collections.FXCollections?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
@@ -13,34 +12,27 @@
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.juliahaidarahmad.exchange.Statistics.Statistics"
             stylesheets="@Statistics.css"
-            prefHeight="500.0" prefWidth="600.0">
+            prefHeight="600.0" prefWidth="800.0">
 
-    <BorderPane prefHeight="300.0" prefWidth="355.0"
-                AnchorPane.topAnchor="5">
-        <center>
-            <LineChart fx:id="graph" title="Rates Over Time"  BorderPane.alignment="CENTER">
-                <xAxis>
-                    <NumberAxis fx:id="xAxis" side="BOTTOM"
-                                    animated="false"/>
-                </xAxis>
-                <yAxis>
-                    <NumberAxis fx:id="yAxis" side="LEFT"
-                                animated="false" />
-                </yAxis>
-            </LineChart>
+    <BorderPane fx:id="graphContainer" prefHeight="260.0" prefWidth="450.0"
+                AnchorPane.topAnchor="100">
+        <center> <LineChart fx:id="graph" title="Rates Over Time" BorderPane.alignment="CENTER">
+            <xAxis>
+                <NumberAxis fx:id="xAxis" side="BOTTOM" animated="false"/>
+            </xAxis>
+            <yAxis>
+                <NumberAxis fx:id="yAxis" side="LEFT" animated="false"/>
+            </yAxis>
+        </LineChart>
         </center>
     </BorderPane>
 
-
-
-
-
     <TableView
             fx:id="tableView"
-            AnchorPane.bottomAnchor="4"
-            AnchorPane.leftAnchor="4"
-            AnchorPane.rightAnchor="4"
-            AnchorPane.topAnchor="320">
+            AnchorPane.bottomAnchor="10"
+            AnchorPane.leftAnchor="10"
+            AnchorPane.rightAnchor="10"
+            AnchorPane.topAnchor="410">
         <columns>
             <TableColumn text="Statistic" fx:id="stats"
                          prefWidth="170"/>
@@ -54,32 +46,8 @@
     </TableView>
 
     <GridPane hgap="10" vgap="10">
-        <ChoiceBox fx:id="choiceBoxCurrency" GridPane.rowIndex="4" GridPane.columnIndex="33" value="LBP to USD" onAction="#fetchGraphs">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="LBP to USD" />
-                    <String fx:value="USD to LBP" />
-                    <String fx:value="Both" />
-                </FXCollections>
-            </items>
-        </ChoiceBox>
-        <ChoiceBox fx:id="numberOfDaysGraph"
-                   GridPane.rowIndex="5"
-                   GridPane.columnIndex="33"
-                   onAction="#fetchGraphs"
-                   value="Last 30 Days">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="Last 10 Days"/>
-                    <String fx:value="Last 15 Days"/>
-                    <String fx:value="Last 30 Days"/>
-                    <String fx:value="Last 60 Days"/>
-                    <String fx:value="Last 90 Days"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
         <ChoiceBox fx:id="numberOfDaysStats"
-                   GridPane.rowIndex="23"
+                   GridPane.rowIndex="36"
                    GridPane.columnIndex="33"
                    onAction="#fetchStats"
                    value="Last 30 Days">
@@ -96,5 +64,21 @@
     </GridPane>
 
 
-
+    <GridPane fx:id="controlPanel" hgap="5" vgap="5"
+              AnchorPane.leftAnchor="10" AnchorPane.rightAnchor="10" AnchorPane.topAnchor="10">
+        <ChoiceBox fx:id="choiceBoxCurrency" GridPane.rowIndex="0" GridPane.columnIndex="0" value="LBP to USD" onAction="#fetchGraphs">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="LBP to USD"/>
+                    <String fx:value="USD to LBP"/>
+                    <String fx:value="Both"/>
+                </FXCollections>
+            </items>
+        </ChoiceBox>
+        <Label text="From:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <DatePicker fx:id="fromDate" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="datepicker"/>
+        <Label text="To:" GridPane.rowIndex="1" GridPane.columnIndex="2"/>
+        <DatePicker fx:id="toDate" GridPane.rowIndex="1" GridPane.columnIndex="3" styleClass="datepicker"/>
+        <Button text="Fetch Data" onAction="#fetchGraphs" GridPane.rowIndex="1" GridPane.columnIndex="4"/>
+    </GridPane>
 </AnchorPane>
