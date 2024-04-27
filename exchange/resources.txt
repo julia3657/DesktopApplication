@@ -1,0 +1,5 @@
+https://docs.oracle.com/javafx/2/charts/line-chart.htm#CIHGBCFI
+https://docs.oracle.com/javase/8/javafx/api/javafx/scene/control/Hyperlink.html
+https://www.javatpoint.com/javafx-tutorial
+https://www.oracle.com/java/technologies/javase/javafxscenebuilder-info.html
+https://docs.oracle.com/javase/8/javase-clienttechnologies.htm
