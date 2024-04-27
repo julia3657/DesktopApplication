@@ -7,22 +7,22 @@ public class Table {
     String statName ="";
 
     @SerializedName("usd_to_lbp")
-    Float usdToLbp;
+    String usdToLbp;
 
     @SerializedName("lbp_to_usd")
-    Float lbpToUsd;
+    String lbpToUsd;
 
-    public Table(String name, Float utol, Float ltou) {
+    public Table(String name, String utol, String ltou) {
         this.statName = name;
         this.usdToLbp = utol;
         this.lbpToUsd = ltou;
     }
 
-    public Float getUsdToLbp() {
+    public String getUsdToLbp() {
         return usdToLbp;
     }
 
-    public Float getLbpToUsd() {
+    public String getLbpToUsd() {
         return lbpToUsd;
     }
 

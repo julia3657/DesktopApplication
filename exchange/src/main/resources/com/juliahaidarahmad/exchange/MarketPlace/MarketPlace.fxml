@@ -12,28 +12,33 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.layout.VBox?>
-<VBox fx:controller="com.juliahaidarahmad.exchange.MarketPlace.MarketPlaceController" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.Scene?>
+<VBox fx:controller="com.juliahaidarahmad.exchange.MarketPlace.MarketPlaceController" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml" >
     <GridPane  alignment="center" hgap="5" stylesheets="@MarketPlace.css" prefHeight="475.0" prefWidth="600.0" vgap="5">
         <Label text="Wallet" styleClass="header" textAlignment="CENTER" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" GridPane.halignment="CENTER"/>
         <Label text="USD Amount" GridPane.columnIndex="0" styleClass="value-label" GridPane.rowIndex="1"/>
         <Label fx:id="usdAmountLabel" GridPane.columnIndex="1" styleClass="value-label" GridPane.rowIndex="1"/>
         <Label text="LBP Amount" GridPane.columnIndex="0" styleClass="value-label" GridPane.rowIndex="2"/>
         <Label fx:id="lbpAmountLabel" GridPane.columnIndex="1" styleClass="value-label" GridPane.rowIndex="2"/>
-        <Separator orientation="HORIZONTAL" GridPane.rowIndex="3" GridPane.columnIndex="0" GridPane.columnSpan="2"/>
-        <Label text="Enter USD value:" styleClass="sub, small-font" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+
+        <Label text="Enter USD value:" styleClass=" my-custom-color" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
         <TextField fx:id="usdTextField" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
-        <Label text="Enter LBP value:" styleClass="sub, small-font" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+        <Label text="Enter LBP value:" styleClass="my-custom-color" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
         <TextField fx:id="lbpTextField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
-        <RadioButton fx:id="buyUsdRadioButton" text="Lbp to Usd" GridPane.columnIndex="0" GridPane.rowIndex="8">
+        <RadioButton fx:id="buyUsdRadioButton" text="USD to LBP" GridPane.columnIndex="0" GridPane.rowIndex="8">
             <toggleGroup>
                 <ToggleGroup fx:id="transactionType"/>
             </toggleGroup>
         </RadioButton>
-        <RadioButton text="Usd to Lbp" toggleGroup="$transactionType" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
+        <RadioButton text="LBP to USD" toggleGroup="$transactionType" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
         <Button text="Sell" GridPane.columnIndex="0" GridPane.rowIndex="9" onAction="#addRequest" />
+    <Hyperlink text="Need Help?" GridPane.columnIndex="0" GridPane.rowIndex="10" onAction="#showHelpText" >
+    </Hyperlink>
     </GridPane>
+
     <Label text="Marketplace Transactions" stylesheets="@MarketPlace.css" styleClass="table-title" GridPane.columnIndex="0" GridPane.rowIndex="0" GridPane.columnSpan="2" />
-    <AnchorPane prefHeight="300.0" prefWidth="300.0">
+    <AnchorPane prefHeight="300.0" prefWidth="300.0" >
         <TableView fx:id="tableView" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <columns>
                 <TableColumn  fx:id="idColumn" prefWidth="0" visible="false"/>

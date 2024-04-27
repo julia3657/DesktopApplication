@@ -1,5 +1,6 @@
 package com.juliahaidarahmad.exchange.api;
 import com.juliahaidarahmad.exchange.api.model.*;
+import com.juliahaidarahmad.exchange.login.ForgotPasswordRequest;
 import retrofit2.Call;
 import retrofit2.http.*;
 
@@ -10,10 +11,15 @@ public interface Exchange {
     Call<User> addUser(@Body User user);
     @POST("/authentication")
     Call<Token> authenticate(@Body User user);
+    @POST("/authentication")
+    Call<Token> authenticateGoogle();
     @GET("/exchangeRate")
     Call<ExchangeRates> getExchangeRates();
     @POST("/transaction")
     Call<Object> addTransaction(@Body Transaction transaction,
+                                @Header("Authorization") String authorization);
+    @POST("/notification")
+    Call<Object> addNotification(@Body AdvancedTransaction transaction,
                                 @Header("Authorization") String authorization);
     @GET("/transaction")
     Call<List<Transaction>> getTransactions(@Header("Authorization")
@@ -36,6 +42,10 @@ public interface Exchange {
 
     @DELETE("/market/{market_id}")
     Call<Void> deleteMarketPlace(@Header("Authorization") String authorization, @Path("market_id") String marketId);
+    @POST("/forgotPassword")
+    Call<Void> forgotPassword(@Body Object request);
 
+    @POST("/resetPassword")
+    Call<Void> resetPassword(@Body ResetPasswordRequest request);
 
 }

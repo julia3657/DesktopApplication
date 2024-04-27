@@ -7,13 +7,13 @@
 <AnchorPane xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml"
             fx:controller="com.juliahaidarahmad.exchange.transactions.Transactions"
+            stylesheets="@transactions.css"
             prefHeight="400.0" prefWidth="600.0">
-    <TableView
-            fx:id="tableView"
-            AnchorPane.bottomAnchor="4"
-            AnchorPane.leftAnchor="4"
-            AnchorPane.rightAnchor="4"
-            AnchorPane.topAnchor="4">
+    <TableView fx:id="tableView"
+               styleClass="cute-table"  AnchorPane.bottomAnchor="4"
+               AnchorPane.leftAnchor="4"
+               AnchorPane.rightAnchor="4"
+               AnchorPane.topAnchor="4">
         <columns>
             <TableColumn text="USD Amount" fx:id="usdAmount"
                          prefWidth="110"/>

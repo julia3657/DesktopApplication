@@ -88,11 +88,11 @@ public class Rates {
         );
         float usdValue = Float.parseFloat(usdTextField.getText());
         float lbpValue = Float.parseFloat(lbpTextField.getText());
-        if (usdValue < 0 || lbpValue < 0) {
+        if (usdValue <= 0 || lbpValue <= 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Warning");
             alert.setHeaderText("Invalid Input Detected");
-            alert.setContentText("Negative values are not allowed. Please enter a positive number.");
+            alert.setContentText("Negative values and Zeros are not allowed. Please enter a positive number.");
             alert.showAndWait();
             return; // Exit the method early
         }
@@ -108,6 +108,7 @@ public class Rates {
                 Platform.runLater(() -> {
                     usdTextField.setText("");
                     lbpTextField.setText("");
+                    transactionType.selectToggle(null);
                 });
             }
 
@@ -137,47 +138,61 @@ public class Rates {
     }
 
     public void calculateResult(ActionEvent actionEvent) {
-
+        try {
             float usdValue = Float.parseFloat(buyUsdRateLabel.getText());
             float lbpValue = Float.parseFloat(sellUsdRateLabel.getText());
+
             if (usdValue <= 0 || lbpValue <= 0) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Warning");
-                alert.setHeaderText("Invalid Input Detected");
-                alert.setContentText("Negative values are not allowed. Please enter a positive number.");
-                alert.showAndWait();
-                return;
+                throw new IllegalArgumentException("Exchange rates must be positive numbers.");
             }
+
             RadioButton selectedRadioButton = (RadioButton) calculatorType.getSelectedToggle();
             if (selectedRadioButton == null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Error");
                 alert.setHeaderText("Please select an exchange type.");
-                return;
-            }
-            boolean isUsdToLbp = selectedRadioButton.getText().equals("USD to LBP");
-            float amount = Float.parseFloat(calculatorTextField.getText());
-            if (amount <= 0) {
-                Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setTitle("Error");
-                alert.setHeaderText("Invalid Input Detected");
-                alert.setContentText("Amount must be greater than zero.");
                 alert.showAndWait();
                 return;
             }
-            float result;
-            if (isUsdToLbp) {
-                result = amount * usdValue;
-            } else {
-                result = amount / lbpValue;
+
+            boolean isUsdToLbp = selectedRadioButton.getText().equals("USD to LBP");
+            float amount = Float.parseFloat(calculatorTextField.getText());
+
+            if (amount <= 0) {
+                throw new IllegalArgumentException("Amount must be greater than zero.");
             }
 
+            float result = isUsdToLbp ? amount * usdValue : amount / lbpValue;
             String output = "Result: " + (isUsdToLbp ? "LBP " : "USD ") + result;
+
             Platform.runLater(() -> {
                 calculatorTextField.setText("");
                 resultCalculator.setText(output);
+                calculatorType.selectToggle(null);
             });
 
+        } catch (NumberFormatException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText("Number Format Error");
+            alert.setContentText("Please ensure all inputs are valid numbers.");
+            alert.showAndWait();
+        } catch (IllegalArgumentException e) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Invalid Input");
+            alert.setHeaderText("Input Validation Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
     }
 
+
+    public void showHelpText(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText("Here's some helpful information");
+        alert.setContentText("In this section, you can add a Transaction. \n If you press Buy Usd that means the transaction is Usd to Lbp. \n If you press Sell Usd that means the transaction is Lbp to Usd.");
+        alert.getDialogPane().setPrefWidth(400); // Adjust width as needed
+        alert.showAndWait();
+    }
 }

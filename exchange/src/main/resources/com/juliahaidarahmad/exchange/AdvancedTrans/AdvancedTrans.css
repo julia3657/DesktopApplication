@@ -4,20 +4,18 @@ body {
     -fx-font-family: sans-serif;
 }
 
-/* Cute elements */
-.header, .table-title {
+.header {
     -fx-text-fill: #3757a0;  /* Light blue for titles */
     -fx-font-size: 20px;  /* Adjust title font size */
     -fx-font-weight: bold;  /* Bold titles */
-
+}
+.value-label {
+    -fx-font-size: 20;
+}
+.value {
+    -fx-font-size: 18;
 }
 
-.value-label, .sub {
-    -fx-font-size: 14px;  /* Adjust label/subtext font size */
-}
-.my-custom-color {
-    -fx-text-fill: #243a73;  /* Dark blue color */
-}
 
 .value-label {
     -fx-text-fill: #243a73;  /* Dark blue for labels */
@@ -39,16 +37,10 @@ TextField {
 TextField:hover {
     -fx-border-color: #3757a0;  /* Light blue border on hover */
 }
-
-/* Radio Buttons */
-.radio-button {
-    -fx-text-fill: #243a73;  /* Dark blue for radio button text */
+.small-checkbox {
+    -fx-padding: 2px 5px;
+    -fx-text-fill: #243a73;
 }
-
-RadioButton {
-    -fx-text-fill: inherit;  /* Inherit color from radio button group */
-}
-
 /* Buttons */
 .button {
     -fx-background-color: #3757a0;  /* Light blue background */
@@ -65,38 +57,36 @@ RadioButton {
 }
 
 /* Hyperlink */
-Hyperlink {
-    -fx-text-fill: #3757a0;  /* Light blue for hyperlink */
+.sub {
+    -fx-text-fill: #3757a0;  /* Light blue for hyperlink (using sub class) */
     -fx-underline: true;  /* Underline for hyperlink */
 }
 
 /* Separator */
 Separator {
-    -fx-background-color: #243a73;  /* Light blue for separator */
+    -fx-background-color: #d3e0e9;  /* Light blue for separator */
 }
 
-
-/* Table View */
+/* Table View (not used in this layout but can be styled here) */
 .table-view {
-    -fx-background-color: white;  /* Light blue background for table */
-
+    -fx-background-color: transparent;  /* Transparent background for table */
+    -fx-border-color: #243a73;  /* Dark blue border for table */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;  /* Rounded corners for table */
 }
 
 .table-view:focused {
-    -fx-border-color: #3757a0;  /* Light blue border on focus (optional) */
+    -fx-border-color: #3757a0;  /* Light blue border on focus */
 }
 
-/* Table Column Header */
+/* Table Column Header (not used in this layout but can be styled here) */
 .table-column .text {
-    -fx-fill: black;  /* White text for column header */
+    -fx-fill: #243a73;  /* Dark blue for column header text */
     -fx-font-weight: bold;  /* Bold column header text */
-    -fx-background-color: #243a73;  /* Dark blue background for header */
 }
 
-/* Table Row */
+/* Table Row (not used in this layout but can be styled here) */
 .table-row-cell {
     -fx-text-fill: #333;  /* Black for table cell text */
-    -fx-background-color: #fff;  /* White background for table cells */
+    -fx-padding: 5px 10px;  /* Adjust padding for table cells */
 }
-
-

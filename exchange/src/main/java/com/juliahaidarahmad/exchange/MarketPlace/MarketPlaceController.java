@@ -21,6 +21,9 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 import com.juliahaidarahmad.exchange.login.Login;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+
 public class MarketPlaceController implements Initializable {
 
     @FXML
@@ -42,11 +45,20 @@ public class MarketPlaceController implements Initializable {
     public TableColumn lbpAmountColumn;
     public TableColumn dateColumn;
     public TableColumn directionColumn;
+    @FXML
+    private Label helpTextLabel;
 
     @FXML
     public Label usdAmountLabel;
     @FXML
     public Label lbpAmountLabel;
+
+    public static void showAlert(AlertType type, String title, String headerText) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(headerText);
+        alert.showAndWait();
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -82,9 +94,10 @@ public class MarketPlaceController implements Initializable {
                 });
                 deleteButton.setOnAction(event -> {
                     MarketPlace dataToDelete = getTableView().getItems().get(getIndex());
-                    handleDelete(dataToDelete,Login.authenticatedUser);
+                    handleDelete(dataToDelete, Login.authenticatedUser);
                 });
             }
+
             @Override
             protected void updateItem(Void item, boolean empty) {
                 super.updateItem(item, empty);
@@ -104,12 +117,13 @@ public class MarketPlaceController implements Initializable {
         loadMarketData();
         getUser();
     }
+
     private void handleDelete(MarketPlace marketPlaceToDelete, User authenticatedUser) {
         String userToken = Authentication.getInstance().getToken();
         String authHeader = userToken != null ? "Bearer " + userToken : null;
 
 
-        if (authHeader != null ) {
+        if (authHeader != null) {
             String marketId = String.valueOf(marketPlaceToDelete.getId());
             ExchangeService.exchangeApi().deleteMarketPlace(authHeader, marketId).enqueue(new Callback<Void>() {
                 @Override
@@ -149,8 +163,13 @@ public class MarketPlaceController implements Initializable {
     }
 
 
-
     private void handleBuy(MarketPlace marketPlace) {
+        // Validation checks
+        if (marketPlace == null || marketPlace.getUsdAmount() <= 0) {
+            showAlert(Alert.AlertType.ERROR, "Invalid Input", "Please enter a valid amount greater than 0.");
+            return;
+        }
+
         String userToken = Authentication.getInstance().getToken();
         String authHeader = userToken != null ? "Bearer " + userToken : null;
 
@@ -161,14 +180,8 @@ public class MarketPlaceController implements Initializable {
                     if (response.isSuccessful()) {
                         showAlert(Alert.AlertType.INFORMATION, "Success", "Transaction successfully processed for " + marketPlace.getUsdAmount() + " USD");
                     } else {
-                        showAlert(Alert.AlertType.ERROR, "Failed", "You cannot buy from yourself " + marketPlace.getUsdAmount() + " USD");
-                        String errorMessage = null;
-                        try {
-                            errorMessage = " Error: " + response.errorBody().string();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                        System.err.println(errorMessage);
+                        String errorMessage = "Make sure you have enough credit and aren't buying from yourself" ;
+                        showAlert(Alert.AlertType.ERROR, "Transaction Failed", errorMessage);
                     }
                 });
             }
@@ -176,49 +189,47 @@ public class MarketPlaceController implements Initializable {
             @Override
             public void onFailure(Call<Void> call, Throwable throwable) {
                 Platform.runLater(() -> {
-                    showAlert(Alert.AlertType.ERROR, "Error", "Network error or server is down. Please try again later.");
-                    throwable.printStackTrace(); // Consider logging this properly or handling the error more gracefully
+                    showAlert(Alert.AlertType.ERROR, "Network Error", "Network error or server is down. Please try again later.");
                 });
+                throwable.printStackTrace();
             }
         });
     }
 
     private void getUser() {
-            String token = "Bearer " + Authentication.getInstance().getToken();
-            ExchangeService.exchangeApi().getUser(token).enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful() && (response.body() != null)) {
-                        User user;
-                        user = response.body();
-                        Platform.runLater(() -> {
-                            Platform.runLater(() -> {
-                                usdAmountLabel.setText(String.format("%.1f USD", user.getUsdBalance()));
-                                lbpAmountLabel.setText(String.format("%.1f LBP", user.getLbpBalance()));
-                            });
-                        });
-                    } else {
-                        Platform.runLater(() -> {
-                            System.err.println("Failed to fetch user info: " + response.code());
-                            Platform.runLater(() -> {
-                                usdAmountLabel.setText("Null");
-                                lbpAmountLabel.setText("Null");
-                            });
-                        });
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<User> call, Throwable throwable) {
+        String token = "Bearer " + Authentication.getInstance().getToken();
+        ExchangeService.exchangeApi().getUser(token).enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if (response.isSuccessful() && (response.body() != null)) {
+                    User user;
+                    user = response.body();
                     Platform.runLater(() -> {
-                        System.err.println("Error fetching user info: " + throwable.getMessage());
-                        // Optionally update your UI with this error
+                        Platform.runLater(() -> {
+                            usdAmountLabel.setText(String.format("%.1f USD", user.getUsdBalance()));
+                            lbpAmountLabel.setText(String.format("%.1f LBP", user.getLbpBalance()));
+                        });
+                    });
+                } else {
+                    Platform.runLater(() -> {
+                        System.err.println("Failed to fetch user info: " + response.code());
+                        Platform.runLater(() -> {
+                            usdAmountLabel.setText("Null");
+                            lbpAmountLabel.setText("Null");
+                        });
                     });
                 }
-            });
-        }
+            }
 
-
+            @Override
+            public void onFailure(Call<User> call, Throwable throwable) {
+                Platform.runLater(() -> {
+                    System.err.println("Error fetching user info: " + throwable.getMessage());
+                    // Optionally update your UI with this error
+                });
+            }
+        });
+    }
 
 
     private void loadMarketData() {
@@ -246,11 +257,21 @@ public class MarketPlaceController implements Initializable {
         try {
             Float usdAmount = Float.parseFloat(usdTextField.getText());
             Float lbpAmount = Float.parseFloat(lbpTextField.getText());
-            boolean usdToLbp = buyUsdRadioButton.isSelected(); // Simplified boolean logic based on selected RadioButton
+
+            if (usdAmount <= 0 || lbpAmount <= 0) {
+                showAlert(Alert.AlertType.WARNING, "Invalid Amount", "Amounts must be greater than zero.");
+                return;
+            }
+
+            // Check if a radio button is selected
+            RadioButton selectedRadioButton = (RadioButton) transactionType.getSelectedToggle();
+            if (selectedRadioButton == null) {
+                showAlert(Alert.AlertType.WARNING, "Selection Missing", "Please select the transaction direction.");
+                return;
+            }
+            boolean usdToLbp = selectedRadioButton.getText().equals("USD to LBP");
 
             MarketPlace marketplace = new MarketPlace(null, usdAmount, lbpAmount, usdToLbp);
-
-
             String userToken = Authentication.getInstance().getToken();
             String authHeader = userToken != null ? "Bearer " + userToken : null;
 
@@ -280,10 +301,13 @@ public class MarketPlaceController implements Initializable {
         }
     }
 
-    private void showAlert(Alert.AlertType alertType, String title, String headerText) {
-        Alert alert = new Alert(alertType);
-        alert.setTitle(title);
-        alert.setHeaderText(headerText);
+    public void showHelpText(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText("Here's some helpful information");
+        alert.setContentText("In this section, you can sell Usd or Lbp and set your expected price. \nPlease select Usd to Lbp if you want to sell Usd \n and select Lbp to Usd if you want to sell Lbp. ");
+        alert.getDialogPane().setPrefWidth(400); // Adjust width as needed
         alert.showAndWait();
     }
+
 }

@@ -1,36 +1,72 @@
-.title {
-    -fx-font-size: 18px;
+/* General Styles */
+body {
+    -fx-background-color: white;
+    -fx-font-family: sans-serif;
 }
 
-.graph-content {
-    -fx-padding: 30px;
+/* Control Panel */
+.controlPanel {
+    -fx-background-color: #d3e0e9;  /* Light blue background */
+    -fx-border-color: #243a73;  /* Dark blue border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;  /* Rounded corners */
+    -fx-padding: 10px;
 }
 
-.ch-legend {
-    -fx-background-color:  transparent;
-    -fx-padding: 20px;
+.choiceBoxCurrency, .datepicker, .button {
+    -fx-background-color: white;
+    -fx-border-color: #243a73;  /* Dark blue border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;  /* Rounded corners */
+    -fx-text-fill: #243a73;  /* Dark blue text */
 }
 
-.graph-legend-item-symbol{
-    -fx-background-radius: 0;
+.choiceBoxCurrency:hover, .datepicker:hover, .button:hover {
+    -fx-background-color: #3757a0;  /* Light blue on hover */
+    -fx-text-fill: white;  /* White text on hover */
 }
 
-.graph-legend-item{
-    -fx-text-fill: #191970;
+.label {
+    -fx-text-fill: #243a73;  /* Dark blue text */
 }
 
-.chart-series-line {
-    -fx-stroke-width: 2px;
-    -fx-effect: null;
+/* Graph Container */
+.graphContainer {
+    -fx-background-color: white;
+    -fx-border-color: #243a73;  /* Dark blue border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;  /* Rounded corners */
+    -fx-padding: 10px;
 }
 
-.default-color0.chart-series-line { -fx-stroke: blue; }
-.default-color1.chart-series-line { -fx-stroke: green; }
+.axis {
+    -fx-tick-label-fill: #243a73;  /* Dark blue axis labels */
+    -fx-axis-label-fill: #243a73;  /* Dark blue axis titles */
+}
 
-.datepicker {
-    -fx-pref-width: 120px;  }
+/* Table View */
+.table-view {
+    -fx-base-table-color: white;  /* White table background */
+    -fx-selection-color: #3757a0;  /* Light blue selection color */
+    -fx-text-fill: #243a73;  /* Dark blue table text (default) */
+}
 
-.large-choicebox {
-    -fx-pref-width: 500px;
-    -fx-pref-height: 20px;
+/* Style the Table Columns */
+.table-column > .text {
+    -fx-fill: #243a73;  /* Light blue for column titles */
+    -fx-font-weight: bold;  /* Make column titles bolder (optional) */
+}
+
+.table-column:visible .table-cell {
+    -fx-background-color: #f2f2f2;  /* Light gray for table cells (optional) */
+    -fx-border-color: #d3e0e9;  /* Light blue cell borders */
+    -fx-border-width: 1px;
+    -fx-text-fill: #243a73;  /* Dark blue table cell text */
+}
+
+/* Other Elements (Optional) */
+.datepicker > .day-picker {
+    -fx-background-color: white;  /* White datepicker background */
+    -fx-border-color: #243a73;  /* Dark blue datepicker border */
+    -fx-border-width: 1px;
 }

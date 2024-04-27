@@ -1,5 +1,6 @@
 package com.juliahaidarahmad.exchange;
 
+import com.juliahaidarahmad.exchange.login.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,6 +33,10 @@ public class Parent implements OnPageCompleteListener,Initializable{
     public void ratesSelected() {
         swapContent(Section.RATES);
     }
+
+    public void advancedSelected() {
+        swapContent(Section.ADVANCED);
+    }
     public void transactionsSelected() {
         swapContent(Section.TRANSACTIONS);
     }
@@ -45,6 +50,7 @@ public class Parent implements OnPageCompleteListener,Initializable{
 
     public void logoutSelected() {
         Authentication.getInstance().deleteToken();
+        Login.authenticatedUser = null;
         swapContent(Section.RATES);
     }
     private void updateNavigation() {
@@ -88,7 +94,8 @@ public class Parent implements OnPageCompleteListener,Initializable{
         REGISTER,
         STATISTICS,
 
-        MARKETPLACE;
+        MARKETPLACE,
+        ADVANCED;
         public String getResource() {
             return switch (this) {
                 case RATES ->
@@ -103,6 +110,8 @@ public class Parent implements OnPageCompleteListener,Initializable{
                         "/com/juliahaidarahmad/exchange/Statistics/Statistics.fxml";
                 case MARKETPLACE ->
                         "/com/juliahaidarahmad/exchange/MarketPlace/MarketPlace.fxml";
+                case ADVANCED ->
+                        "/com/juliahaidarahmad/exchange/AdvancedTrans/AdvancedTrans.fxml";
                 default -> null;
             };
         }

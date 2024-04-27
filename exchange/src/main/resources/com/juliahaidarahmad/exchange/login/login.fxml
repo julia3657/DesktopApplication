@@ -5,6 +5,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import java.net.URL?>
+
+<?import javafx.beans.binding.BooleanBinding?>
 <FlowPane xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml"
           fx:controller="com.juliahaidarahmad.exchange.login.Login"
@@ -12,14 +14,25 @@
           prefHeight="400.0" prefWidth="600.0"
           orientation="VERTICAL"
           vgap="10"
-          alignment="CENTER"
->
+          alignment="CENTER">
     <Label styleClass="title" text="Login"/>
     <Label text="Username"/>
     <TextField fx:id="usernameTextField"/>
     <Label text="Password"/>
-    <TextField fx:id="passwordTextField"/>
+    <PasswordField fx:id="passwordTextField"/>
     <Button text="Login" onAction="#login"/>
     <Hyperlink text="Login with Google" onAction="#openGoogleLogin"> </Hyperlink>
-    <Hyperlink text="Forget Password?" onAction="#openGoogleLogin"> </Hyperlink>
+
+    <Hyperlink text="Forget Password?" onAction="#handleForgotPassword">
+    </Hyperlink>
+
+
+    <GridPane fx:id="forgotPasswordFields" visible="true" hgap="10" vgap="5">
+        <Label text="Ticket" GridPane.rowIndex="0"/>
+        <TextField fx:id="ticketTextField" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="New Password" GridPane.rowIndex="1"/>
+        <PasswordField fx:id="newPasswordTextField" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Button text="Reset Password" onAction="#resetPassword" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
 </FlowPane>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.control.Label?>
+
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.control.Hyperlink?>
+<?import javafx.scene.control.CheckBox?>
+<GridPane fx:controller="com.juliahaidarahmad.exchange.AdvancedTrans.AdvancedTrans"
+          xmlns:fx="http://javafx.com/fxml" alignment="center" hgap="10"
+          stylesheets="@AdvancedTrans.css"
+          prefHeight="475.0"
+          prefWidth="600.0"
+          vgap="10">
+    <Label text="LBP Exchange Rate"
+           styleClass="header"
+           textAlignment="CENTER" GridPane.columnSpan="2"
+           GridPane.halignment="CENTER"
+    />
+    <Label text="Buy USD Rate" GridPane.columnIndex="0"
+           styleClass="value-label"
+           GridPane.rowIndex="4"/>
+    <Label fx:id="buyUsdRateLabel" text="Buy Rate"
+           styleClass="value"
+           GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+    <Label text="Sell USD Rate" GridPane.columnIndex="1"
+           styleClass="value-label"
+           GridPane.rowIndex="4"/>
+    <Label fx:id="sellUsdRateLabel" text="Sell Rate"
+           styleClass="value"
+           GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    <Separator orientation="HORIZONTAL" GridPane.RowIndex="6"
+               GridPane.columnIndex="0" GridPane.columnSpan="2"/>
+    <TextField fx:id="FirstTextField" GridPane.columnIndex="0" GridPane.rowIndex="7"  promptText="Exchange Rate" />
+    <TextField fx:id="SecondTextField" GridPane.columnIndex="1" GridPane.rowIndex="7"  promptText="Amount to Buy" />
+    <CheckBox fx:id="belowTransaction" text="Less Than?" GridPane.columnIndex="0" GridPane.rowIndex="8" styleClass="small-checkbox"/>
+    <CheckBox fx:id="UsdToLbp" text="Usd To Lbp" GridPane.columnIndex="1" GridPane.rowIndex="8" styleClass="small-checkbox"/>
+    <CheckBox fx:id="Buy" text="Buy" GridPane.columnIndex="0" GridPane.rowIndex="9" styleClass="small-checkbox"/>
+
+
+    <Button text="Add Transaction" GridPane.columnIndex="1" GridPane.rowIndex="9" onAction="#addTransaction" styleClass="button"/>
+
+    <Hyperlink text="Need Help?" onAction="#showHelpText" GridPane.columnIndex="0" GridPane.rowIndex="10" styleClass="sub"/>
+
+    <Label text="Here you specify under/over which exchange rate you want to perform a transaction." prefWidth="200" fx:id="helpTextLabel" visible="false" wrapText="true" GridPane.columnIndex="0" GridPane.rowIndex="14"/>
+
+</GridPane>

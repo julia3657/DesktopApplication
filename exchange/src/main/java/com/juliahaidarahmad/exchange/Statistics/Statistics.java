@@ -1,27 +1,23 @@
 package com.juliahaidarahmad.exchange.Statistics;
 
 import com.juliahaidarahmad.exchange.api.ExchangeService;
-import com.juliahaidarahmad.exchange.api.model.GraphPoint;
 import com.juliahaidarahmad.exchange.api.model.GraphsResponse;
 import com.juliahaidarahmad.exchange.api.model.CurrencyExchangeData;
 import com.juliahaidarahmad.exchange.api.model.Table;
+import com.juliahaidarahmad.exchange.login.ForgotPasswordRequest;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.*;
 
-import java.util.ArrayList;
 import javafx.scene.control.cell.PropertyValueFactory;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
 
 
 import java.net.URL;

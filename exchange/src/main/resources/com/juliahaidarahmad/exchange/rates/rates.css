@@ -13,3 +13,89 @@
 .vale {
     -fx-font-size: 12;
 }
+/* General Styles */
+body {
+    -fx-background-color: #e6e6e6;  /* Light gray background */
+    -fx-font-family: sans-serif;
+}
+
+/* Cute elements */
+.header {
+    -fx-text-fill: #3757a0;  /* Light blue for title */
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;  /* Bold title */
+}
+
+.value-label, .value {
+    -fx-font-size: 16px;  /* Adjust label/value font size */
+}
+
+.value-label {
+    -fx-text-fill: #243a73;  /* Dark blue for labels */
+}
+
+.value {
+    -fx-text-fill: #3757a0;  /* Light blue for values */
+}
+
+/* Text Fields */
+TextField {
+    -fx-background-color: #f2f2f2;  /* Light gray background */
+    -fx-border-color: #243a73;  /* Dark blue border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;  /* Rounded corners */
+    -fx-padding: 5px 10px;  /* Adjust padding for better spacing */
+}
+
+TextField:hover {
+    -fx-border-color: #3757a0;  /* Light blue border on hover */
+}
+
+/* Radio Buttons */
+.radio-button {
+    -fx-text-fill: #243a73;  /* Dark blue for radio button text */
+}
+
+RadioButton {
+    -fx-text-fill: inherit;  /* Inherit color from radio button group */
+}
+
+/* Toggle Group (optional - customize for a cuter look) */
+.toggle-group {
+    -fx-background-color: transparent;  /* Transparent background */
+}
+
+/* Buttons */
+.button {
+    -fx-background-color: #3757a0;  /* Light blue background */
+    -fx-text-fill: white;  /* White text */
+    -fx-border-color: #243a73;  /* Dark blue border */
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;  /* Rounded corners */
+    -fx-padding: 10px 20px;  /* Adjust padding for button size */
+    -fx-cursor: hand;  /* Hand cursor on hover */
+}
+
+.button:hover {
+    -fx-background-color: #243a73;  /* Darker blue on hover */
+}
+
+/* Hyperlink */
+Hyperlink {
+    -fx-text-fill: #3757a0;  /* Light blue for hyperlink */
+    -fx-underline: true;  /* Underline for hyperlink */
+}
+
+/* Separator */
+Separator {
+    -fx-background-color: #d3e0e9;  /* Light blue for separator */
+}
+
+/* Calculator Section */
+#calculatorTextField {
+    -fx-max-width: 100px;  /* Limit calculator text field width */
+}
+
+#resultCalculator {
+    -fx-font-weight: bold;  /* Bold result text */
+}

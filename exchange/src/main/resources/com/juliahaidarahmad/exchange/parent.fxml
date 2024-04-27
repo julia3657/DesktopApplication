@@ -16,6 +16,9 @@
             <Button fx:id="transactionButton" styleClass="nav-button"
                     text="Transactions"
                     onAction="#transactionsSelected"/>
+            <Button fx:id="advancedButton" styleClass="nav-button"
+                    text="Advanced Transactions"
+                    onAction="#advancedSelected"/>
             <Button fx:id="loginButton" styleClass="nav-button"
                     text="Login" onAction="#loginSelected"/>
             <Button fx:id="registerButton" styleClass="nav-button"
